@@ -10,7 +10,7 @@ RUN apt-get -qy update
 RUN apt install -qy python3 python3-pip software-properties-common git ansible
 RUN pip install ansible-lint==4.0.0
 RUN apt-get install zip unzip
-RUN wget https://releases.hashicorp.com/terraform/0.14.4/terraform_0.14.4_linux_amd64.zip; \
-    unzip -o -d /usr/local/bin/ terraform_0.14.4_linux_amd64.zip; \
+RUN wget https://releases.hashicorp.com/terraform/0.14.4/terraform_0.14.4_linux_amd64.zip
+RUN unzip -o -d /usr/local/bin/ terraform_0.14.4_linux_amd64.zip
 
 CMD ["/bin/bash"]
