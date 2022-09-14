@@ -1,0 +1,29 @@
+name: Build and push
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  build:
+    name: Build image
+    runs-on: ubuntu:20.04
+    
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build image
+      run: docker build -t $DOCKER_USER/terra-ansible:$IMAGE_TAG .
+
+    - name: Login to Dockerhub
+      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+    - name: Push to the Dockerhub
+      run: docker push $DOCKER_USER/terra-ansible:$IMAGE_TAG
